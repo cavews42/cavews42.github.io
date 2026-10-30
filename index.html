@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>스크롤 멈춰 · 인스타 릴스·유튜브 쇼츠 차단 앱</title>
+<meta name="description" content="인스타는 그대로, 릴스만 멈춰. DM도 알림도 그대로 두고 릴스·쇼츠로 빠지는 길만 막는 안드로이드 앱이에요. 광고도, 수집도 없어요.">
+<link rel="canonical" href="https://cavews42.github.io/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E2F2FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1F2C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="스크롤 멈춰">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://cavews42.github.io/">
+<meta property="og:title" content="스크롤 멈춰 · 인스타는 그대로, 릴스만 멈춰">
+<meta property="og:description" content="인스타는 그대로, 릴스만 멈춰. DM도 알림도 그대로 두고 릴스·쇼츠로 빠지는 길만 막는 안드로이드 앱이에요. 광고도, 수집도 없어요.">
+<meta property="og:image" content="https://cavews42.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="해가 뜨는 언덕 아이콘과 '인스타는 그대로, 릴스만 멈춰.' 문구">
+<meta name="twitter:card" content="summary_large_image">
+<!-- 구글 서치 콘솔 인증: 아래 줄 주석을 풀고 content에 받은 값 넣기 -->
+<!-- <meta name="google-site-verification" content=""> -->
+<!-- 네이버 서치어드바이저 인증: 아래 줄 주석을 풀고 content에 받은 값 넣기 -->
+<!-- <meta name="naver-site-verification" content=""> -->
+<style>
+@font-face{font-family:"Jua";src:url("fonts/jua-subset.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Gowun Dodum";src:url("fonts/gowun-dodum-subset.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+
+/* Layout: a sunny hill. A sky band holds the headline and the app icon as a small landscape;
+   a grass band carries "when to use it"; calm left-aligned sections sit on a green-tinted ground.
+   The one memorable moment is the phone demo, where the Reels tab pops like a balloon. */
+:root{
+  --ground:#F5F9F4;
+  --surface:#FFFFFF;
+  --ink:#17301F;
+  --muted:#4D6455;
+  --line:#D8E6DA;
+  --sky-band:#E2F2FB;
+  --sky:#CFEAF7;
+  --sun:#FFD45C;
+  --grass:#2A7F3F;
+  --grass-deep:#216A33;
+  --on-grass:#FBF7E6;
+  --accent-text:#24713A;
+  --phone:#1D2B23;
+  --screen:#FFFFFF;
+  --screen-ink:#1D2B23;
+  --screen-dim:#E5EDE6;
+  --viewer-a:#2A7F3F;
+  --viewer-b:#7DB8D6;
+  --cal-past:#6F8C7C;
+  --cal-sf:#F2B629;
+  --cal-saved:#2A7F3F;
+  --cal-empty:#FFFFFF;
+  --cal-ring:#B9D7E6;
+  --font-display:"Jua","Gowun Dodum","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --font-body:"Gowun Dodum","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1914; --surface:#15241C; --ink:#E5EFE7; --muted:#A3B8A9; --line:#26392D;
+    --sky-band:#0F1F2C; --sky:#18304A; --sun:#F1E3A4; --grass:#2E7A45; --grass-deep:#245F36;
+    --on-grass:#F6F2DE; --accent-text:#82CF9A; --phone:#08100B; --screen:#1A2A21;
+    --screen-ink:#E5EFE7; --screen-dim:#2A3F31; --viewer-a:#2E7A45; --viewer-b:#3E6F8C;
+    --cal-past:#6C8798; --cal-sf:#F1D77A; --cal-saved:#5FBF7E; --cal-empty:#22405C; --cal-ring:#2E4F6E;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1914; --surface:#15241C; --ink:#E5EFE7; --muted:#A3B8A9; --line:#26392D;
+  --sky-band:#0F1F2C; --sky:#18304A; --sun:#F1E3A4; --grass:#2E7A45; --grass-deep:#245F36;
+  --on-grass:#F6F2DE; --accent-text:#82CF9A; --phone:#08100B; --screen:#1A2A21;
+  --screen-ink:#E5EFE7; --screen-dim:#2A3F31; --viewer-a:#2E7A45; --viewer-b:#3E6F8C;
+  --cal-past:#6C8798; --cal-sf:#F1D77A; --cal-saved:#5FBF7E; --cal-empty:#22405C; --cal-ring:#2E4F6E;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.75;
+  word-break:keep-all;
+  overflow-wrap:anywhere;
+}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;line-height:1.25;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--accent-text)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:8px}
+.wrap{
+  max-width:1080px;margin-inline:auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:52px;padding:0 24px;border-radius:999px;
+  font-family:var(--font-display);font-size:19px;text-decoration:none;
+}
+.btn-primary{background:var(--grass);color:var(--on-grass)}
+.btn-primary:hover{background:var(--grass-deep)}
+.btn-quiet{color:var(--ink);border:2px solid var(--ink)}
+
+/* hero */
+.hero{background:var(--sky-band)}
+.hero .wrap{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
+  gap:40px;align-items:center;padding-block:64px 8px;
+}
+.hero h1{font-size:clamp(42px, 7.2vw, 76px);letter-spacing:-0.01em}
+.hero-copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero-lead{font-size:clamp(17px, 2.1vw, 20px);color:var(--muted);max-width:30em}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.hero-note{font-size:15px;color:var(--muted)}
+.icon-scene{width:min(400px, 100%);justify-self:center;filter:drop-shadow(0 18px 30px rgba(25,70,45,.18))}
+.icon-scene .bg{fill:var(--sky)}
+.icon-scene .sun{fill:var(--sun);animation:rise 1.8s cubic-bezier(.2,.8,.2,1) both}
+.icon-scene .land{fill:var(--grass)}
+@keyframes rise{from{transform:translateY(150px)}to{transform:translateY(0)}}
+.hill{display:block;width:100%;height:clamp(48px, 8vw, 96px);color:var(--grass)}
+
+/* grass band */
+.band{background:var(--grass);color:var(--on-grass)}
+.band .wrap{padding-block:12px 56px;display:grid;gap:24px}
+.band h2{font-size:clamp(26px, 4vw, 34px)}
+.when{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.when li{display:flex;gap:12px;align-items:flex-start;font-size:18px;min-width:0}
+.when svg{flex:none;width:26px;height:26px;margin-top:3px}
+.when svg path{fill:var(--sun)}
+
+/* sections */
+.section .wrap{padding-block:80px 0;display:grid;gap:28px}
+.section h2{font-size:clamp(28px, 4.6vw, 42px)}
+.section-lead{color:var(--muted);max-width:34em;font-size:18px}
+
+/* demo */
+.demo{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:56px;align-items:center}
+.phone{
+  position:relative;width:min(280px, 76vw);max-width:100%;aspect-ratio:9/18.6;
+  background:var(--phone);border-radius:42px;padding:11px;
+  box-shadow:0 30px 60px -20px rgba(20,50,30,.35);
+}
+.screen{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:var(--screen);color:var(--screen-ink)}
+.feed{position:absolute;inset:0 0 58px 0;padding:18px 16px;display:flex;flex-direction:column;gap:16px}
+.feed-top{height:14px;width:42%;border-radius:7px;background:var(--screen-dim)}
+.post{display:flex;flex-direction:column;gap:8px}
+.post-head{display:flex;gap:8px;align-items:center}
+.post-head i{width:26px;height:26px;border-radius:50%;background:var(--screen-dim)}
+.post-head b{height:9px;width:38%;border-radius:5px;background:var(--screen-dim)}
+.post-img{height:120px;border-radius:12px;background:var(--screen-dim)}
+.post-line{height:9px;width:70%;border-radius:5px;background:var(--screen-dim)}
+.tabbar{
+  position:absolute;left:0;right:0;bottom:0;height:58px;background:var(--screen);
+  border-top:1px solid var(--screen-dim);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;
+}
+.slot{position:relative;display:grid;place-items:center;height:100%}
+.slot svg{width:25px;height:25px;fill:none;stroke:var(--screen-ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.reels-icon{transition:transform .5s cubic-bezier(.3,1.6,.5,1), opacity .2s ease}
+.reels-icon .balloon{fill:var(--sun);stroke:none;opacity:0;transition:opacity .3s ease}
+.phone.inflate .reels-icon{transform:scale(1.55)}
+.phone.inflate .reels-icon .balloon{opacity:1}
+.phone.popped .reels-icon{transform:scale(1.9);opacity:0}
+.burst{position:absolute;left:50%;top:50%;width:0;height:0}
+.burst span{position:absolute;width:7px;height:7px;margin:-3.5px;border-radius:50%;background:var(--sun);opacity:0}
+.phone.bursting .burst span{animation:burst .6s ease-out forwards}
+.burst span:nth-child(1){--dx:-26px;--dy:-22px}
+.burst span:nth-child(2){--dx:0px;--dy:-32px}
+.burst span:nth-child(3){--dx:26px;--dy:-22px}
+.burst span:nth-child(4){--dx:-30px;--dy:6px;background:var(--grass)}
+.burst span:nth-child(5){--dx:30px;--dy:6px;background:var(--grass)}
+@keyframes burst{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4)}}
+.tap{
+  position:absolute;width:36px;height:36px;margin:-18px;left:50%;top:50%;border-radius:50%;
+  background:var(--screen-ink);opacity:0;transform:scale(.6);transition:opacity .25s ease, transform .25s ease;
+}
+.phone.tapping .reels-slot .tap{opacity:.22;transform:scale(1)}
+.nothing{
+  position:absolute;bottom:64px;left:50%;transform:translateX(-50%);
+  background:var(--screen-ink);color:var(--screen);font-size:12px;line-height:1;padding:7px 10px;border-radius:999px;
+  white-space:nowrap;opacity:0;transition:opacity .25s ease;
+}
+.phone.tapping .nothing{opacity:1}
+.viewer{
+  position:absolute;inset:0;background:var(--viewer-a);transform:translateX(100%);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1);overflow:hidden;
+}
+.phone.viewing .viewer{transform:translateX(0)}
+.track{position:absolute;inset:0;transition:transform .7s cubic-bezier(.3,1.35,.45,1)}
+.phone.swiping .track{transform:translateY(-36%);transition:transform .6s cubic-bezier(.4,0,.6,1)}
+.clip{position:absolute;left:0;right:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 18px 28px;gap:6px;color:#FFFFFF}
+.clip-a{top:0;background:var(--viewer-a)}
+.clip-b{top:100%;background:var(--viewer-b)}
+.clip svg{position:absolute;left:50%;top:42%;width:54px;height:54px;margin:-27px;fill:rgba(255,255,255,.9)}
+.clip b{font-family:var(--font-display);font-weight:400;font-size:17px}
+.clip small{font-size:12px;opacity:.85}
+.finger{
+  position:absolute;left:50%;bottom:22%;width:38px;height:38px;margin-left:-19px;border-radius:50%;
+  background:rgba(255,255,255,.55);opacity:0;transition:opacity .2s ease;
+}
+.phone.swiping .finger{opacity:1;animation:drag .6s cubic-bezier(.4,0,.6,1) forwards}
+@keyframes drag{from{transform:translateY(0)}to{transform:translateY(-120px)}}
+.toast{
+  position:absolute;left:12px;right:12px;bottom:20px;background:rgba(10,20,14,.82);color:#FFFFFF;
+  font-size:13px;line-height:1.4;padding:10px 12px;border-radius:14px;text-align:center;
+  opacity:0;transform:translateY(8px);transition:opacity .3s ease, transform .3s ease;
+}
+.phone.bounced .toast{opacity:1;transform:translateY(0)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:step;min-width:0}
+.steps li{
+  counter-increment:step;display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:start;
+  padding:16px 18px;border-radius:18px;color:var(--muted);transition:background .3s ease,color .3s ease;
+}
+.steps li::before{
+  content:counter(step);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;
+  border:2px solid currentColor;font-family:var(--font-display);font-size:19px;line-height:1;
+}
+.steps li.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.steps h3{font-size:21px;margin-bottom:2px}
+.steps p{font-size:16px}
+
+/* differences */
+.diffs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+.diff{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding-block:26px;border-top:1px solid var(--line)}
+.diff-art{width:64px;height:64px;border-radius:20px;background:var(--sky);display:grid;place-items:center}
+.diff-art svg{width:38px;height:38px}
+.diff h3{font-size:23px;margin-bottom:6px}
+.diff p{color:var(--muted)}
+
+/* privacy */
+.privacy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.pcol{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:24px 24px 26px;display:grid;gap:12px;align-content:start;min-width:0}
+.pcol h3{font-size:22px}
+.plist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.plist li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start}
+.mark{width:22px;height:22px;margin-top:4px}
+.mark-yes circle{fill:var(--grass)}
+.mark-yes path,.mark-no path{fill:none;stroke:var(--on-grass);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.mark-no circle{fill:var(--muted)}
+.privacy-note{color:var(--muted);max-width:40em}
+
+/* calculator + life calendar */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+.calc-form{display:grid;gap:22px;align-content:start}
+.field{display:grid;gap:8px}
+.field label{font-size:16px;color:var(--muted)}
+.field-row{display:flex;align-items:center;gap:14px}
+.field output{font-family:var(--font-display);font-size:22px;min-width:5.5em;font-variant-numeric:tabular-nums}
+input[type=range]{flex:1;min-width:0;accent-color:var(--grass);height:32px}
+input[type=number]{
+  width:7em;font:inherit;font-size:20px;padding:8px 12px;border-radius:12px;border:2px solid var(--line);
+  background:var(--surface);color:var(--ink);font-variant-numeric:tabular-nums;
+}
+.calc-result{background:var(--sky);border-radius:28px;padding:28px;display:grid;gap:16px;align-content:start;min-width:0}
+.calc-head{display:grid;gap:4px}
+.calc-result .big{font-family:var(--font-display);font-size:clamp(40px, 7vw, 64px);line-height:1.1;font-variant-numeric:tabular-nums}
+.calc-result .give{color:var(--accent-text);max-width:28em}
+.calc-foot{font-size:14px;color:var(--muted)}
+.life{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+.life canvas{display:block;flex:none}
+.life-side{display:grid;gap:10px;flex:1 1 150px;min-width:0}
+.life-cap{font-size:14px;line-height:1.55;color:var(--muted)}
+.legend{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:2px 16px;font-size:14px;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:8px;transition:opacity .35s ease}
+.legend li.off{opacity:.3}
+.seg{display:inline-grid;grid-auto-flow:column;gap:2px;padding:4px;border-radius:999px;background:var(--surface);justify-self:start}
+.seg button{
+  font:inherit;font-size:15px;min-height:40px;padding:0 16px;border:0;border-radius:999px;
+  background:transparent;color:var(--muted);cursor:pointer;transition:background .3s ease,color .3s ease;
+}
+.seg button[aria-pressed="true"]{background:var(--grass);color:var(--on-grass)}
+.seg button:disabled{opacity:.4;cursor:default}
+.sw{flex:none;width:11px;height:11px;border-radius:50%}
+.sw-past{background:var(--cal-past)}
+.sw-sf{background:var(--cal-sf)}
+.sw-saved{background:var(--cal-saved)}
+.sw-empty{background:var(--cal-empty);box-shadow:inset 0 0 0 1px var(--cal-ring)}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.plan{border-top:4px solid var(--grass);padding-top:18px;display:grid;gap:10px;align-content:start}
+.plan.pro{border-top-color:var(--sun)}
+.plan h3{font-size:24px}
+.plan ul{margin:0;padding-left:1.1em;display:grid;gap:6px;color:var(--muted)}
+
+/* closing */
+.closing{margin-top:96px;background:var(--sky-band)}
+.closing .wrap{padding-block:64px 24px;display:grid;gap:18px;justify-items:start}
+.closing h2{font-size:clamp(30px, 5vw, 46px)}
+.closing p{max-width:34em}
+.closing small{color:var(--muted);font-size:14px}
+footer{background:var(--grass);color:var(--on-grass)}
+footer .wrap{padding-block:28px 40px;display:grid;gap:8px;font-size:15px}
+footer a{color:var(--on-grass)}
+.foot-links{display:flex;flex-wrap:wrap;gap:6px 20px}
+
+@media (max-width: 820px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);padding-block:40px 0;gap:28px}
+  .icon-scene{width:min(300px, 78%)}
+  .when{grid-template-columns:minmax(0,1fr);gap:14px}
+  .demo{grid-template-columns:minmax(0,1fr);gap:32px;justify-items:center}
+  .steps{width:100%}
+  .diffs,.privacy,.calc,.plans{grid-template-columns:minmax(0,1fr)}
+  .section .wrap{padding-block:64px 0}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>인스타는 그대로,<br>릴스만 멈춰.</h1>
+      <p class="hero-lead">DM도, 알림도, 친구 게시물도 그대로 둬요. 릴스와 쇼츠로 빠지는 길만 조용히 치워두는 안드로이드 앱이에요.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://forms.gle/VXKm3EpeSf1dC9kNA" target="_blank" rel="noopener">테스터 신청하기</a>
+        <a class="btn btn-quiet" href="#demo">어떻게 막는지 보기</a>
+      </div>
+      <p class="hero-note">안드로이드 전용이에요. 정식 출시 전에 14일 비공개 테스트를 함께할 분을 찾고 있어요.</p>
+    </div>
+    <svg class="icon-scene" viewBox="0 0 1024 1024" role="img" aria-label="해 뜨는 언덕 위에 일시정지 기호처럼 선 잔디 두 잎">
+      <defs><clipPath id="iconclip"><rect width="1024" height="1024" rx="232"/></clipPath></defs>
+      <g clip-path="url(#iconclip)">
+        <rect class="bg" width="1024" height="1024"/>
+        <circle class="sun" cx="512" cy="690" r="270"/>
+        <g class="land">
+          <path d="M346 820 L346 420 C346 360 330 310 304 272 C364 300 466 352 466 440 L466 820 Z"/>
+          <path d="M678 820 L678 400 C678 340 694 286 722 246 C662 278 558 334 558 420 L558 820 Z"/>
+          <path d="M-10 1034 L-10 800 C160 712 864 712 1034 800 L1034 1034 Z"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <svg class="hill" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 100 L0 70 C320 6 1120 6 1440 70 L1440 100 Z"/></svg>
+</header>
+
+<section class="band" aria-labelledby="when-title">
+  <div class="wrap">
+    <h2 id="when-title">이럴 때 켜두세요</h2>
+    <ul class="when">
+      <li><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M8 24 L8 12 C8 9 7 6 5 4 C9 6 12 9 12 13 L12 24 Z M18 24 L18 12 C18 9 19 6 21 4 C17 6 14 9 14 13 L14 24 Z"/></svg><span>DM 때문에 인스타를 지울 수는 없을 때</span></li>
+      <li><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M8 24 L8 12 C8 9 7 6 5 4 C9 6 12 9 12 13 L12 24 Z M18 24 L18 12 C18 9 19 6 21 4 C17 6 14 9 14 13 L14 24 Z"/></svg><span>친구가 보낸 영상 하나가 한 시간이 될 때</span></li>
+      <li><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M8 24 L8 12 C8 9 7 6 5 4 C9 6 12 9 12 13 L12 24 Z M18 24 L18 12 C18 9 19 6 21 4 C17 6 14 9 14 13 L14 24 Z"/></svg><span>앱을 통째로 막는 건 너무 과할 때</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="demo" aria-labelledby="demo-title">
+  <div class="wrap">
+    <h2 id="demo-title">막는 방식이 조용해요</h2>
+    <p class="section-lead">경고 화면을 띄우거나 앱을 닫아버리지 않아요. 숏폼으로 들어가는 문만 슬쩍 치워둬요.</p>
+    <div class="demo">
+      <div class="phone popped" id="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="feed">
+            <div class="feed-top"></div>
+            <div class="post"><div class="post-head"><i></i><b></b></div><div class="post-img"></div><div class="post-line"></div></div>
+            <div class="post"><div class="post-head"><i></i><b></b></div><div class="post-img"></div></div>
+          </div>
+          <div class="tabbar">
+            <div class="slot"><svg viewBox="0 0 24 24"><path d="M4 10.5 L12 4 L20 10.5 V20 H14.5 V14.5 H9.5 V20 H4 Z"/></svg></div>
+            <div class="slot"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16 L20.5 20.5"/></svg></div>
+            <div class="slot reels-slot">
+              <svg class="reels-icon" viewBox="0 0 24 24"><circle class="balloon" cx="12" cy="12" r="10"/><rect x="4" y="4" width="16" height="16" rx="4.5"/><path d="M10 9 L15 12 L10 15 Z"/></svg>
+              <div class="burst"><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="tap"></div>
+            </div>
+            <div class="slot"><svg viewBox="0 0 24 24"><path d="M21 4 L10 13.5"/><path d="M21 4 L14.5 20 L10 13.5 L3.5 9.5 Z"/></svg></div>
+            <div class="slot"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5 C5.5 16 8.5 14 12 14 C15.5 14 18.5 16 19.5 20.5"/></svg></div>
+          </div>
+          <div class="nothing">눌러도 반응 없음</div>
+          <div class="viewer">
+            <div class="track">
+              <div class="clip clip-a"><svg viewBox="0 0 24 24"><path d="M8 5 L19 12 L8 19 Z"/></svg><b>친구가 보낸 릴스</b><small>이건 볼 수 있어요</small></div>
+              <div class="clip clip-b"><svg viewBox="0 0 24 24"><path d="M8 5 L19 12 L8 19 Z"/></svg><b>다음 릴스</b><small>여기로는 안 넘어가요</small></div>
+            </div>
+            <div class="finger"></div>
+            <div class="toast">릴스는 하나만 볼 수 있어요</div>
+          </div>
+        </div>
+      </div>
+      <p class="sr-only">휴대폰 화면 예시: 릴스 탭이 풍선처럼 터지며 사라지고, 빈자리를 눌러도 반응이 없어요. 친구가 보낸 릴스를 보다가 다음으로 넘기면 처음 릴스로 돌아오고 안내가 떠요.</p>
+      <ol class="steps" id="steps">
+        <li data-step="1" class="on"><div><h3>탭이 풍선처럼 터지며 사라져요</h3><p>인스타 릴스 탭, 유튜브 쇼츠 탭이 홈 화면에서 비켜나요.</p></div></li>
+        <li data-step="2" class="on"><div><h3>빈자리를 눌러도 아무 일 없어요</h3><p>실수로 눌러도 숏폼으로 들어가지 않아요.</p></div></li>
+        <li data-step="3" class="on"><div><h3>보낸 건 보고, 다음은 안 넘어가요</h3><p>친구가 보낸 릴스는 볼 수 있어요. 다음 영상으로 넘기면 제자리로 돌아와요.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="diff-title">
+  <div class="wrap">
+    <h2 id="diff-title">다른 차단 앱과 달라요</h2>
+    <div class="diffs">
+      <div class="diff">
+        <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><rect x="9" y="3" width="20" height="32" rx="5" fill="none" stroke="var(--grass)" stroke-width="2.6"/><circle cx="25" cy="8" r="5" fill="var(--sun)"/><path d="M14 27 h10" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round"/></svg></div>
+        <div><h3>진짜 앱 그대로</h3><p>웹 화면으로 흉내 낸 앱이 아니에요. 원래 쓰던 인스타와 유튜브 위에서 동작해서 알림, DM, 게시가 하나도 빠지지 않아요.</p></div>
+      </div>
+      <div class="diff">
+        <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><rect x="10" y="4" width="18" height="14" rx="4" fill="var(--grass)"/><rect x="10" y="21" width="18" height="13" rx="4" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-dasharray="4 3"/><path d="M33 26 C33 18 31 14 28 11" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round"/><path d="M24 11 L28 11 L28 15" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h3>보낸 건 딱 하나만</h3><p>친구가 DM으로 보낸 릴스나 탐색에서 연 영상은 볼 수 있어요. 다음 영상으로 넘기는 순간만 막아요.</p></div>
+      </div>
+      <div class="diff">
+        <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><path d="M19 4 L31 9 V18 C31 26 26 31 19 34 C12 31 7 26 7 18 V9 Z" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 19 L17.5 23.5 L25 15" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h3>광고도, 수집도 없어요</h3><p>로그인도, 광고도, 분석 도구도 없어요. 화면 내용은 저장하거나 보내지 않고 폰 안에서만 처리해요.</p></div>
+      </div>
+      <div class="diff">
+        <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><circle cx="19" cy="17" r="11" fill="var(--sun)"/><path d="M19 28 C18 31 19 33 21 35" fill="none" stroke="var(--grass)" stroke-width="2.4" stroke-linecap="round"/><path d="M14 13 C15.5 11.5 17 11 18.5 11.2" fill="none" stroke="var(--on-grass)" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+        <div><h3>벌주지 않아요</h3><p>한도를 넘어도 경고 화면 대신 탭이 풍선처럼 터지며 사라져요. 보고 싶은 날엔 언제든 바로 끌 수 있어요.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="privacy-title">
+  <div class="wrap">
+    <h2 id="privacy-title">접근성 권한, 이렇게만 써요</h2>
+    <p class="section-lead">릴스·쇼츠 탭을 가리려면 그 탭이 화면 어디에 있는지 알아야 해요. 그래서 안드로이드의 접근성 권한이 필요해요.</p>
+    <div class="privacy">
+      <div class="pcol">
+        <h3>확인하는 것</h3>
+        <ul class="plist">
+          <li><svg class="mark mark-yes" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5 L9.5 14.5 L15.5 8"/></svg><span>인스타그램과 유튜브 화면에서 릴스·쇼츠 탭의 이름과 위치</span></li>
+          <li><svg class="mark mark-yes" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5 L9.5 14.5 L15.5 8"/></svg><span>지금 열려 있는 앱이 인스타그램이나 유튜브인지</span></li>
+          <li><svg class="mark mark-yes" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M6.5 11.5 L9.5 14.5 L15.5 8"/></svg><span>숏폼을 본 시간 (폰 안에만 기록해요)</span></li>
+        </ul>
+      </div>
+      <div class="pcol">
+        <h3>하지 않는 것</h3>
+        <ul class="plist">
+          <li><svg class="mark mark-no" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M7.5 7.5 L14.5 14.5 M14.5 7.5 L7.5 14.5"/></svg><span>메시지, 게시물 같은 화면 내용 저장이나 전송</span></li>
+          <li><svg class="mark mark-no" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M7.5 7.5 L14.5 14.5 M14.5 7.5 L7.5 14.5"/></svg><span>다른 앱 화면 처리</span></li>
+          <li><svg class="mark mark-no" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11"/><path d="M7.5 7.5 L14.5 14.5 M14.5 7.5 L7.5 14.5"/></svg><span>로그인, 광고, 분석 도구</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="privacy-note">인터넷이 없어도 동작해요. 인스타·유튜브가 바뀌었을 때 차단 규칙을 받아오는 것과 Google Play 결제만 예외예요. 자세한 내용은 <a href="https://cavews42.github.io/idontwannascroll-rules/privacy/" target="_blank" rel="noopener">개인정보처리방침</a>에 있어요.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="calc-title">
+  <div class="wrap">
+    <h2 id="calc-title">하루 몇 분이, 평생 몇 년이 될까요</h2>
+    <div class="calc">
+      <form class="calc-form" id="calc" novalidate>
+        <div class="field">
+          <label for="age">지금 나이</label>
+          <div class="field-row"><input type="number" id="age" inputmode="numeric" min="10" max="80" value="30"><span>살</span></div>
+        </div>
+        <div class="field">
+          <label for="mins">하루에 숏폼 보는 시간</label>
+          <div class="field-row"><input type="range" id="mins" min="5" max="240" step="5" value="60"><output id="mins-out" for="mins">1시간</output></div>
+        </div>
+        <p class="calc-foot">통계청 2024년 생명표의 기대수명 83.7세를 기준으로 계산해요. 계산은 이 페이지 안에서만 하고, 입력한 값은 어디에도 보내지 않아요.</p>
+      </form>
+      <div class="calc-result">
+        <p class="sr-only" aria-live="polite" id="calc-live"></p>
+        <div class="calc-head">
+          <p id="lead">지금 속도라면 평생</p>
+          <p class="big" id="total">약 2년 87일</p>
+        </div>
+        <figure class="life">
+          <canvas id="life" role="img" aria-label="점 하나가 1년인 인생 그림"></canvas>
+          <div class="life-side">
+            <figcaption class="life-cap">점 하나가 1년, 한 줄이 10년이에요. 숏폼 시간은 한데 모아 칠했어요.</figcaption>
+            <ul class="legend">
+              <li><span class="sw sw-past"></span>지나온 해</li>
+              <li><span class="sw sw-sf"></span>숏폼</li>
+              <li class="off" id="lg-saved"><span class="sw sw-saved"></span>돌려받는 시간</li>
+              <li><span class="sw sw-empty"></span>남은 해</li>
+            </ul>
+          </div>
+        </figure>
+        <div class="seg" role="group" aria-label="비교">
+          <button type="button" id="seg-now" aria-pressed="true">지금 속도</button>
+          <button type="button" id="seg-15" aria-pressed="false">하루 15분이면</button>
+        </div>
+        <p class="give" id="saved">하루 15분으로 줄이면 약 1년 248일을 돌려받아요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="plans-title">
+  <div class="wrap">
+    <h2 id="plans-title">막는 건 무료예요</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>무료</h3>
+        <ul>
+          <li>인스타 릴스 탭, 유튜브 쇼츠 탭 숨기기</li>
+          <li>보낸 영상은 하나만 보기</li>
+          <li>항상 막기, 또는 하루 15~20분만 허용</li>
+          <li>오늘 본 시간</li>
+        </ul>
+      </div>
+      <div class="plan pro">
+        <h3>Pro</h3>
+        <ul>
+          <li>하루 한도를 5분부터 90분까지 원하는 대로</li>
+          <li>주간·월간 기록과 지난주와 비교</li>
+          <li>평생으로 환산한 리포트</li>
+          <li>월 구독 또는 한 번 사는 평생 이용권</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing" aria-labelledby="join-title">
+  <div class="wrap">
+    <h2 id="join-title">14일 비공개 테스트에 함께해 주세요</h2>
+    <p>안드로이드 폰으로 인스타나 유튜브를 쓰는 분이면 누구나 신청할 수 있어요. 끝까지 참여해 주신 분께 정식 출시 후 평생 이용권(29,900원 상당)을 드려요.</p>
+    <a class="btn btn-primary" href="https://forms.gle/VXKm3EpeSf1dC9kNA" target="_blank" rel="noopener">테스터 신청하기</a>
+    <small>신청은 구글 폼으로 받아요. 적어 주신 이메일은 테스트 초대와 이용권 발송에만 써요.</small>
+  </div>
+  <svg class="hill" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 100 L0 70 C320 6 1120 6 1440 70 L1440 100 Z"/></svg>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="https://cavews42.github.io/idontwannascroll-rules/privacy/" target="_blank" rel="noopener">개인정보처리방침</a>
+      <span>문의 idontwannascroll@gmail.com</span>
+    </div>
+    <p>이 페이지는 분석 도구도, 쿠키도 쓰지 않아요.</p>
+    <p>© 2026 케부 · 스크롤 멈춰 (IdontWannaScroll)</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // lifetime calculator: same formula as the app's onboarding
+  var LIFE = 83.7, CELLS = Math.ceil(LIFE), COLS = 10, ROWS = Math.ceil(CELLS / COLS);
+  var PITCH = 20, R = 7, PAD = 3;  // one dot = one year, one row = ten years
+  var W = COLS * PITCH + PAD * 2, H = ROWS * PITCH + PAD * 2;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var age = document.getElementById('age');
+  var mins = document.getElementById('mins');
+  var out = document.getElementById('mins-out');
+  var lead = document.getElementById('lead');
+  var total = document.getElementById('total');
+  var saved = document.getElementById('saved');
+  var live = document.getElementById('calc-live');
+  var segNow = document.getElementById('seg-now');
+  var seg15 = document.getElementById('seg-15');
+  var lgSaved = document.getElementById('lg-saved');
+  var canvas = document.getElementById('life');
+  var ctx = canvas.getContext('2d');
+  function span(days){
+    days = Math.max(0, Math.round(days));
+    var y = Math.floor(days / 365), d = days % 365;
+    if (y === 0) return d + '일';
+    return y + '년 ' + d + '일';
+  }
+  function minsLabel(m){
+    var h = Math.floor(m / 60), r = m % 60;
+    if (h === 0) return r + '분';
+    return r === 0 ? h + '시간' : h + '시간 ' + r + '분';
+  }
+  function css(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function setupCanvas(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  // all values in years. past = lived, sf = short-form total, keep = what's left of it at 15 min/day.
+  // mix 0 -> 1 goes from "지금 속도" to "하루 15분": the sun part shrinks to keep, the freed part turns green.
+  var KEYS = ['past', 'sf', 'keep', 'mix', 'days', 'd15'];
+  var cur = {past:0, sf:0, keep:0, mix:0, days:0, d15:0}, goal = Object.assign({}, cur);
+  var mode15 = false, anim = null, played = false;
+
+  function wedge(cx, cy, r, a, b, color){
+    ctx.beginPath();
+    if (b - a >= 0.999) ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    else {
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, -Math.PI / 2 + a * Math.PI * 2, -Math.PI / 2 + b * Math.PI * 2);
+      ctx.closePath();
+    }
+    ctx.fillStyle = color; ctx.fill();
+  }
+  function draw(){
+    var col = {past:css('--cal-past'), sf:css('--cal-sf'), saved:css('--cal-saved'), empty:css('--cal-empty'), ring:css('--cal-ring'), ink:css('--ink')};
+    ctx.clearRect(0, 0, W, H);
+    var start = cur.past, end = cur.past + cur.sf;
+    var sunEnd = end - cur.mix * Math.max(0, cur.sf - cur.keep);
+    var bands = [[0, start, col.past], [start, sunEnd, col.sf], [sunEnd, end, col.saved]];
+    for (var i = 0; i < CELLS; i++){
+      var cx = PAD + (i % COLS) * PITCH + PITCH / 2, cy = PAD + Math.floor(i / COLS) * PITCH + PITCH / 2;
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fillStyle = col.empty; ctx.fill();
+      ctx.lineWidth = 1; ctx.strokeStyle = col.ring; ctx.stroke();
+      for (var k = 0; k < bands.length; k++){
+        var a = Math.max(bands[k][0], i) - i, b = Math.min(bands[k][1], i + 1) - i;
+        if (b - a > 0.004) wedge(cx, cy, R + 0.5, a, b, bands[k][2]);
+      }
+    }
+    var now = Math.floor(goal.past);  // ring around this year
+    if (now < CELLS){
+      var nx = PAD + (now % COLS) * PITCH + PITCH / 2, ny = PAD + Math.floor(now / COLS) * PITCH + PITCH / 2;
+      ctx.beginPath(); ctx.arc(nx, ny, R + 2.6, 0, Math.PI * 2);
+      ctx.lineWidth = 1.3; ctx.strokeStyle = col.ink; ctx.stroke();
+    }
+    total.textContent = '약 ' + span(cur.days - cur.mix * (cur.days - cur.d15));
+  }
+  function ease(t){ return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function tween(next, ms, reveal){
+    goal = next;
+    if (anim){ cancelAnimationFrame(anim); anim = null; }
+    if (reduce || !ms){ cur = Object.assign({}, next); draw(); return; }
+    var from = Object.assign({}, cur), t0 = null;
+    function step(ts){
+      if (t0 === null) t0 = ts;
+      var t = Math.min(1, (ts - t0) / ms);
+      KEYS.forEach(function(key){
+        var k = ease(t);
+        if (reveal){  // lived years fill first, then the short-form time pours in
+          if (key === 'past') k = ease(Math.min(1, t / 0.5));
+          else if (key === 'sf' || key === 'keep') k = ease(Math.max(0, (t - 0.42) / 0.58));
+        }
+        cur[key] = from[key] + (next[key] - from[key]) * k;
+      });
+      draw();
+      anim = t < 1 ? requestAnimationFrame(step) : null;
+    }
+    anim = requestAnimationFrame(step);
+  }
+  function setMode(on){
+    mode15 = on;
+    segNow.setAttribute('aria-pressed', String(!on));
+    seg15.setAttribute('aria-pressed', String(on));
+    lead.textContent = on ? '하루 15분이면 평생' : '지금 속도라면 평생';
+    lgSaved.classList.toggle('off', !on);
+  }
+  function compute(){
+    var a = parseFloat(age.value);
+    if (isNaN(a)) a = 30;
+    a = Math.min(80, Math.max(10, a));
+    var m = parseInt(mins.value, 10);
+    var yearsLeft = Math.max(0, LIFE - a);
+    var used = m * yearsLeft * 365 / 1440;              // days
+    var at15 = Math.min(m, 15) * yearsLeft * 365 / 1440;
+    var can15 = m > 15;
+    out.textContent = minsLabel(m);
+    seg15.disabled = !can15;
+    if (!can15 && mode15) setMode(false);
+    saved.textContent = can15
+      ? '하루 15분으로 줄이면 약 ' + span(used - at15) + '을 돌려받아요.'
+      : '이미 하루 15분 이하예요. 그 리듬을 지키도록 도와드릴게요.';
+    var shown = mode15 ? at15 : used;
+    live.textContent = (mode15 ? '하루 15분이면 평생 약 ' : '지금 속도라면 평생 약 ') + span(shown) + '. ' + saved.textContent;
+    canvas.setAttribute('aria-label', '점 하나가 1년인 인생 그림. 기대수명 83.7년 중 ' + a + '년을 지나왔고, 앞으로 숏폼에 쓰게 될 약 ' + span(used) + '을 한데 모아 칠했어요.'
+      + (mode15 ? ' 하루 15분이면 그중 약 ' + span(used - at15) + '이 돌려받는 시간으로 바뀌어요.' : ''));
+    return {past:a, sf:used / 365, keep:at15 / 365, mix:mode15 ? 1 : 0, days:used, d15:at15};
+  }
+  function update(ms){ played = true; tween(compute(), ms); }
+  age.addEventListener('input', function(){ update(600); });
+  mins.addEventListener('input', function(){ update(420); });
+  segNow.addEventListener('click', function(){ if (mode15){ setMode(false); update(950); } });
+  seg15.addEventListener('click', function(){ if (!mode15 && !seg15.disabled){ setMode(true); update(950); } });
+  document.getElementById('calc').addEventListener('submit', function(e){ e.preventDefault(); });
+
+  setupCanvas();
+  var first = compute();
+  if (!reduce && 'IntersectionObserver' in window){
+    // start with only the text, then fill the dots once the card is on screen
+    cur = Object.assign({}, first, {past:0, sf:0, keep:0}); goal = first; draw();
+    new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        obs.disconnect();
+        if (!played){ played = true; tween(compute(), 2000, true); }
+      });
+    }, {threshold: 0.6}).observe(canvas);
+  } else {
+    tween(first, 0);
+  }
+  if (window.matchMedia){
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', draw);
+  }
+  new MutationObserver(draw).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+
+
+  // phone demo: one looping sequence
+  var phone = document.getElementById('phone');
+  var steps = Array.prototype.slice.call(document.querySelectorAll('#steps li'));
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return; // resting state already shows the result and all steps
+  var ALL = ['inflate','popped','bursting','tapping','viewing','swiping','bounced'];
+  function only(step){ steps.forEach(function(li){ li.classList.toggle('on', li.getAttribute('data-step') === String(step)); }); }
+  function set(list){ ALL.forEach(function(c){ phone.classList.toggle(c, list.indexOf(c) !== -1); }); }
+  var timeline = [
+    [0,    function(){ set([]); only(1); }],
+    [1300, function(){ set(['inflate']); }],
+    [1900, function(){ set(['popped','bursting']); }],
+    [2700, function(){ set(['popped']); }],
+    [3300, function(){ set(['popped','tapping']); only(2); }],
+    [4700, function(){ set(['popped']); }],
+    [5300, function(){ set(['popped','viewing']); only(3); }],
+    [6500, function(){ set(['popped','viewing','swiping']); }],
+    [7200, function(){ set(['popped','viewing','bounced']); }],
+    [9600, function(){ set(['popped']); }]
+  ];
+  var LOOP = 10600, timers = [], running = false;
+  function run(){
+    timers.forEach(clearTimeout); timers = [];
+    timeline.forEach(function(t){ timers.push(setTimeout(t[1], t[0])); });
+    timers.push(setTimeout(function(){ if (running) run(); }, LOOP));
+  }
+  function start(){ if (!running){ running = true; run(); } }
+  function stop(){ running = false; timers.forEach(clearTimeout); timers = []; set(['popped']); steps.forEach(function(li){ li.classList.add('on'); }); }
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) start(); else stop(); });
+    }, {threshold: 0.35}).observe(phone);
+  } else { start(); }
+})();
+</script>
+</body>
+</html>
