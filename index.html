@@ -122,6 +122,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 .hero-lead{font-size:clamp(17px, 2.1vw, 20px);color:var(--muted);max-width:30em}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
 .hero-note{font-size:15px;color:var(--muted)}
+.join-steps{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;max-width:30em}
+.join-steps-title{margin:0 0 8px;font-size:14px;font-weight:700;color:var(--accent-text)}
+.join-steps ol{margin:0;padding:0;list-style:none;counter-reset:js;display:grid;gap:6px}
+.join-steps li{counter-increment:js;display:flex;align-items:center;gap:10px;font-size:15px}
+.join-steps li::before{content:counter(js);flex:none;width:24px;height:24px;border-radius:50%;background:var(--grass);color:var(--on-grass);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.join-steps-help{margin:10px 0 0;font-size:14px;color:var(--muted)}
+.join-steps-help a{color:var(--accent-text);font-weight:700}
 .icon-scene{width:min(400px, 100%);justify-self:center;filter:drop-shadow(0 18px 30px rgba(25,70,45,.18))}
 .icon-scene .bg{fill:var(--sky)}
 .icon-scene .sun{fill:var(--sun);animation:rise 1.8s cubic-bezier(.2,.8,.2,1) both}
@@ -325,12 +332,21 @@ footer a{color:var(--on-grass)}
   <div class="wrap">
     <div class="hero-copy">
       <h1>인스타는 그대로,<br>릴스만 멈춰.</h1>
-      <p class="hero-lead">DM도, 알림도, 친구 게시물도 그대로 둬요. 릴스와 쇼츠로 빠지는 길만 조용히 치워두는 안드로이드 앱이에요.</p>
+      <p class="hero-lead">DM도, 알림도, 친구 게시물도 그대로 둬요. 릴스와 쇼츠로 빠지는 길만 조용히 치워두는 안드로이드 앱이에요. 광고도, 수집도 없어요.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://forms.gle/VXKm3EpeSf1dC9kNA" target="_blank" rel="noopener">테스터 신청하기</a>
         <a class="btn btn-quiet" href="#demo">어떻게 막는지 보기</a>
       </div>
       <p class="hero-note">안드로이드 전용이에요. 정식 출시 전에 2주 정도 비공개 테스트를 함께할 분을 찾고 있어요.</p>
+      <div class="join-steps">
+        <p class="join-steps-title">신청 후 순서</p>
+        <ol>
+          <li><span><b>신청서 제출</b> 후 나오는 링크로</span></li>
+          <li><span><b>테스터 그룹 가입</b> (꼭 먼저)</span></li>
+          <li><span><b>테스터 되기</b> 누르고 설치</span></li>
+        </ol>
+        <p class="join-steps-help">&ldquo;App not available&rdquo;이 뜨면 그룹 가입을 먼저 해 주세요. 막히면 <a href="https://open.kakao.com/o/gCZY3xYi" target="_blank" rel="noopener">오픈채팅방</a>에서 물어보세요.</p>
+      </div>
     </div>
     <svg class="icon-scene" viewBox="0 0 1024 1024" role="img" aria-label="해 뜨는 언덕 위에 일시정지 기호처럼 선 잔디 두 잎">
       <defs><clipPath id="iconclip"><rect width="1024" height="1024" rx="232"/></clipPath></defs>
@@ -408,22 +424,22 @@ footer a{color:var(--on-grass)}
     <h2 id="diff-title">다른 차단 앱과 달라요</h2>
     <div class="diffs">
       <div class="diff">
-        <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><rect x="10" y="4" width="18" height="14" rx="4" fill="var(--grass)"/><rect x="10" y="21" width="18" height="13" rx="4" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-dasharray="4 3"/><path d="M33 26 C33 18 31 14 28 11" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round"/><path d="M24 11 L28 11 L28 15" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><h3>하나는 열어두고, 본 시간은 보여줘요</h3><p>친구가 DM으로 보낸 릴스나 탐색에서 연 영상은 볼 수 있고, 다음 영상으로 넘기는 순간만 막아요. 다 막아버리지 않으니 하루에 얼마나 봤는지가 숫자로 남아요. 무심코 넘긴 시간이 생각보다 길다는 걸 직접 보게 돼요.</p></div>
-      </div>
-      <div class="diff">
-        <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><rect x="9" y="3" width="20" height="32" rx="5" fill="none" stroke="var(--grass)" stroke-width="2.6"/><circle cx="25" cy="8" r="5" fill="var(--sun)"/><path d="M14 27 h10" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round"/></svg></div>
-        <div><h3>진짜 앱 그대로</h3><p>웹 화면으로 흉내 낸 앱이 아니에요. 원래 쓰던 인스타와 유튜브 위에서 동작해서 알림, DM, 게시가 하나도 빠지지 않아요.</p></div>
-      </div>
-      <div class="diff">
         <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><path d="M19 4 L31 9 V18 C31 26 26 31 19 34 C12 31 7 26 7 18 V9 Z" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 19 L17.5 23.5 L25 15" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><h3>광고도, 수집도 없어요</h3><p>로그인도, 광고도, 분석 도구도 없어요. 화면 내용은 저장하거나 보내지 않고 폰 안에서만 처리해요.</p></div>
+        <div><h3>광고도, 수집도 없어요</h3><p>집중하려고 켠 앱에 광고가 뜨면 이상하잖아요. 그래서 광고도, 로그인도, 분석 도구도 넣지 않았어요. 화면 내용은 저장하거나 보내지 않고 폰 안에서만 처리해요.</p></div>
+      </div>
+      <div class="diff">
+        <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><rect x="10" y="4" width="18" height="14" rx="4" fill="var(--grass)"/><rect x="10" y="21" width="18" height="13" rx="4" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-dasharray="4 3"/><path d="M33 26 C33 18 31 14 28 11" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round"/><path d="M24 11 L28 11 L28 15" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h3>하나는 열어두고, 본 시간은 보여줘요</h3><p>친구가 DM으로 보낸 릴스나 탐색에서 연 영상은 볼 수 있고, 다음 영상으로 넘기는 순간만 막아요. 다 막아버리지 않으니 끄지 않고 계속 쓰게 되고, 하루에 얼마나 봤는지가 숫자로 남아요. 최근 7일 기록은 무료로 볼 수 있어요.</p></div>
       </div>
       <div class="diff">
         <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><circle cx="19" cy="17" r="11" fill="var(--sun)"/><path d="M19 28 C18 31 19 33 21 35" fill="none" stroke="var(--grass)" stroke-width="2.4" stroke-linecap="round"/><path d="M14 13 C15.5 11.5 17 11 18.5 11.2" fill="none" stroke="var(--on-grass)" stroke-width="2.4" stroke-linecap="round"/></svg></div>
         <div><h3>벌주지 않아요</h3><p>한도를 넘어도 경고 화면 대신 탭이 풍선처럼 터지며 사라져요. 기본은 언제든 바로 끌 수 있어요. 스스로 묶어두고 싶은 날엔 도전 모드를 켜면 돼요.</p></div>
       </div>
-    </div>
+      <div class="diff">
+        <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><rect x="9" y="3" width="20" height="32" rx="5" fill="none" stroke="var(--grass)" stroke-width="2.6"/><circle cx="25" cy="8" r="5" fill="var(--sun)"/><path d="M14 27 h10" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round"/></svg></div>
+        <div><h3>진짜 앱 그대로</h3><p>웹 화면으로 흉내 낸 앱이 아니에요. 원래 쓰던 인스타와 유튜브 위에서 동작해서 알림, DM, 게시가 하나도 빠지지 않아요.</p></div>
+      </div>
+</div>
   </div>
 </section>
 
@@ -506,15 +522,17 @@ footer a{color:var(--on-grass)}
           <li>인스타 릴스 탭, 유튜브 쇼츠 탭 숨기기</li>
           <li>보낸 영상은 하나만 보기</li>
           <li>하나만 보기, 또는 하루 15~20분 타이머</li>
-          <li>오늘 본 시간</li>
+          <li>오늘 본 시간과 앱별 비율</li>
+          <li>최근 7일 기록과 지난주 비교</li>
+          <li>폰 설정을 따라가는 다크 모드</li>
         </ul>
       </div>
       <div class="plan pro">
         <h3>Pro</h3>
         <ul>
           <li>하루 한도를 5분부터 120분까지, 5분 단위로</li>
-          <li>주간·월간 기록과 지난주와 비교</li>
-          <li>평생으로 환산한 리포트</li>
+          <li>월간 기록</li>
+          <li>평생 환산: 처음보다 얼마나 돌려받았는지</li>
           <li>요일마다 다른 규칙 · 도전 모드</li>
           <li>월 구독 또는 한 번 사는 평생 이용권</li>
         </ul>
@@ -528,7 +546,7 @@ footer a{color:var(--on-grass)}
     <h2 id="join-title">2주 비공개 테스트에 함께해 주세요</h2>
     <p>안드로이드 폰으로 인스타나 유튜브를 쓰는 분이면 누구나 신청할 수 있어요. 테스트 종료 안내까지 함께해 주신 분께 정식 출시 후 평생 이용권(29,900원 상당)을 드려요. 테스트 중에 따로 결제할 필요는 없어요.</p>
     <a class="btn btn-primary" href="https://forms.gle/VXKm3EpeSf1dC9kNA" target="_blank" rel="noopener">테스터 신청하기</a>
-    <small>신청은 구글 폼으로 받고, 제출하면 바로 설치 방법이 나와요. 적어 주신 이메일은 테스트 안내와 이용권 발송에만 써요.</small>
+    <small>신청은 구글 폼으로 받고, 제출하면 바로 설치 방법이 나와요. 적어 주신 이메일은 테스트 안내와 이용권 발송에만 써요. 궁금한 점은 <a href="https://open.kakao.com/o/gCZY3xYi" target="_blank" rel="noopener">오픈채팅방</a>에서 편하게 물어보세요.</small>
     <div class="ios-ask">
       <h3>아이폰을 쓰시나요?</h3>
       <p>아이폰은 다른 앱 화면 안의 릴스 탭만 골라 가리는 기능을 애플이 허용하지 않아서, 지금 방식 그대로는 만들 수 없어요. 아이폰 버전을 원하시면 눌러 주세요. 기다리는 분이 많으면 아이폰에 맞는 방식으로 만들어 볼게요.</p>
