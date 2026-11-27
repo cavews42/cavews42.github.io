@@ -23,10 +23,8 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="해가 뜨는 언덕 아이콘과 '인스타는 그대로, 릴스만 멈춰.' 문구">
 <meta name="twitter:card" content="summary_large_image">
-<!-- 구글 서치 콘솔 인증: 아래 줄 주석을 풀고 content에 받은 값 넣기 -->
-<!-- <meta name="google-site-verification" content=""> -->
-<!-- 네이버 서치어드바이저 인증: 아래 줄 주석을 풀고 content에 받은 값 넣기 -->
-<!-- <meta name="naver-site-verification" content=""> -->
+<meta name="google-site-verification" content="Ua1UatbLOQ5GFODdkcVBsd56P9KZ4tNLv1p9PoUNXvo">
+<meta name="naver-site-verification" content="8fc58d5713d95f8c521fd6aa5714b9f1ba02b4c3">
 <style>
 @font-face{font-family:"Jua";src:url("fonts/jua-subset.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Gowun Dodum";src:url("fonts/gowun-dodum-subset.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
@@ -325,7 +323,99 @@ footer a{color:var(--on-grass)}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+.faq{display:grid;gap:0;width:100%;max-width:46em;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 2px;min-height:44px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0;font-size:17px;line-height:1.5}
+.faq-item summary::after{content:"+";flex:none;font-size:22px;line-height:1;color:var(--accent-text)}
+.faq-item[open] summary::after{content:"−"}
+.faq-item p{margin:0 2px 20px;color:var(--muted);line-height:1.75}
+.faq-item summary:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px;border-radius:6px}
 </style>
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "스크롤 멈춰",
+  "alternateName": "idontwannascroll",
+  "operatingSystem": "Android",
+  "applicationCategory": "LifestyleApplication",
+  "description": "인스타그램 릴스와 유튜브 쇼츠만 막는 안드로이드 앱. DM과 피드는 그대로 두고 숏폼으로 빠지는 길만 막아요. 광고도, 수집도 없어요.",
+  "url": "https://cavews42.github.io/",
+  "inLanguage": "ko",
+  "offers": {
+   "@type": "Offer",
+   "price": "0",
+   "priceCurrency": "KRW"
+  }
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+   {
+    "@type": "Question",
+    "name": "인스타그램 릴스만 끄는 방법이 있나요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "인스타그램 앱 설정만으로는 릴스 탭을 없앨 수 없어요. 스크롤 멈춰는 릴스 탭을 가리고, 친구가 DM으로 보낸 릴스는 하나만 볼 수 있게 해요. DM, 피드, 스토리, 검색은 원래대로 쓸 수 있어요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "유튜브 쇼츠만 안 보는 법은요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "쇼츠 탭을 잠가서 끝없이 넘기는 화면으로 들어가지 않게 해요. 검색이나 채널에서 연 쇼츠는 하나만 볼 수 있고, 긴 영상과 구독, 검색은 그대로예요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "인스타그램이나 유튜브를 지우거나 다른 앱으로 바꿔야 하나요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "아니요. 원래 쓰던 인스타그램·유튜브 앱을 그대로 써요. 로그인이나 회원가입도 필요 없어요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "광고나 개인정보 수집이 있나요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "없어요. 광고, 분석 도구, 오류 보고 도구를 넣지 않았어요. 화면 정보는 폰 안에서만 처리하고 저장하거나 보내지 않아요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "접근성 권한은 왜 필요한가요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "릴스·쇼츠 탭과 영상 화면을 찾아 가리기 위해 안드로이드 접근성 기능을 써요. 켜기 전에 무엇을 읽고 어떻게 처리하는지 앱에서 먼저 안내하고, 폰 설정에서 언제든 끌 수 있어요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "무료로 쓸 수 있나요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "릴스·쇼츠를 막는 기능은 모두 무료예요. Pro는 월간 기록, 평생 환산, 요일별 규칙처럼 기록과 규칙을 넓혀 주는 기능이에요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "아이폰에서도 쓸 수 있나요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "지금은 안드로이드 전용이에요. 아이폰은 다른 앱 화면 안의 릴스 탭만 골라 가리는 기능을 허용하지 않아서, 같은 방식으로는 만들 수 없어요. 아래 '아이폰 버전 원해요'를 눌러 주시면 수요를 보고 다른 방식을 고민해 볼게요."
+    }
+   }
+  ]
+ }
+]
+</script>
 </head>
 <body>
 <header class="hero">
@@ -537,6 +627,42 @@ footer a{color:var(--on-grass)}
           <li>월 구독 또는 한 번 사는 평생 이용권</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">자주 묻는 질문</h2>
+    <div class="faq">
+      <details class="faq-item">
+        <summary><h3>인스타그램 릴스만 끄는 방법이 있나요?</h3></summary>
+        <p>인스타그램 앱 설정만으로는 릴스 탭을 없앨 수 없어요. 스크롤 멈춰는 릴스 탭을 가리고, 친구가 DM으로 보낸 릴스는 하나만 볼 수 있게 해요. DM, 피드, 스토리, 검색은 원래대로 쓸 수 있어요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>유튜브 쇼츠만 안 보는 법은요?</h3></summary>
+        <p>쇼츠 탭을 잠가서 끝없이 넘기는 화면으로 들어가지 않게 해요. 검색이나 채널에서 연 쇼츠는 하나만 볼 수 있고, 긴 영상과 구독, 검색은 그대로예요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>인스타그램이나 유튜브를 지우거나 다른 앱으로 바꿔야 하나요?</h3></summary>
+        <p>아니요. 원래 쓰던 인스타그램·유튜브 앱을 그대로 써요. 로그인이나 회원가입도 필요 없어요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>광고나 개인정보 수집이 있나요?</h3></summary>
+        <p>없어요. 광고, 분석 도구, 오류 보고 도구를 넣지 않았어요. 화면 정보는 폰 안에서만 처리하고 저장하거나 보내지 않아요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>접근성 권한은 왜 필요한가요?</h3></summary>
+        <p>릴스·쇼츠 탭과 영상 화면을 찾아 가리기 위해 안드로이드 접근성 기능을 써요. 켜기 전에 무엇을 읽고 어떻게 처리하는지 앱에서 먼저 안내하고, 폰 설정에서 언제든 끌 수 있어요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>무료로 쓸 수 있나요?</h3></summary>
+        <p>릴스·쇼츠를 막는 기능은 모두 무료예요. Pro는 월간 기록, 평생 환산, 요일별 규칙처럼 기록과 규칙을 넓혀 주는 기능이에요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>아이폰에서도 쓸 수 있나요?</h3></summary>
+        <p>지금은 안드로이드 전용이에요. 아이폰은 다른 앱 화면 안의 릴스 탭만 골라 가리는 기능을 허용하지 않아서, 같은 방식으로는 만들 수 없어요. 아래 '아이폰 버전 원해요'를 눌러 주시면 수요를 보고 다른 방식을 고민해 볼게요.</p>
+      </details>
     </div>
   </div>
 </section>
