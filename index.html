@@ -26,8 +26,8 @@
 <meta name="google-site-verification" content="Ua1UatbLOQ5GFODdkcVBsd56P9KZ4tNLv1p9PoUNXvo">
 <meta name="naver-site-verification" content="8fc58d5713d95f8c521fd6aa5714b9f1ba02b4c3">
 <style>
-@font-face{font-family:"Jua";src:url("fonts/jua-subset.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Gowun Dodum";src:url("fonts/gowun-dodum-subset.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Jua";src:url("fonts/jua-subset.woff2?v=1128b") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Gowun Dodum";src:url("fonts/gowun-dodum-subset.woff2?v=1128b") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 
 /* Layout: a sunny hill. A sky band holds the headline and the app icon as a small landscape;
    a grass band carries "when to use it"; calm left-aligned sections sit on a green-tinted ground.
@@ -358,26 +358,50 @@ footer a{color:var(--on-grass)}
   "mainEntity": [
    {
     "@type": "Question",
-    "name": "인스타그램 릴스만 끄는 방법이 있나요?",
+    "name": "인스타그램 릴스만 끌 수 있나요?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "인스타그램 앱 설정만으로는 릴스 탭을 없앨 수 없어요. 스크롤 멈춰는 릴스 탭을 가리고, 친구가 DM으로 보낸 릴스는 하나만 볼 수 있게 해요. DM, 피드, 스토리, 검색은 원래대로 쓸 수 있어요."
+     "text": "네, 릴스만 따로 막을 수 있어요. 인스타그램 설정에는 릴스 탭만 끄는 기능이 없어서, 스크롤 멈춰가 릴스 탭을 가리고 넘기는 화면으로 들어가지 못하게 해요. DM, 피드, 스토리, 검색은 그대로 쓸 수 있어요."
     }
    },
    {
     "@type": "Question",
-    "name": "유튜브 쇼츠만 안 보는 법은요?",
+    "name": "유튜브 쇼츠만 끌 수 있나요?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "쇼츠 탭을 잠가서 끝없이 넘기는 화면으로 들어가지 않게 해요. 검색이나 채널에서 연 쇼츠는 하나만 볼 수 있고, 긴 영상과 구독, 검색은 그대로예요."
+     "text": "네, 쇼츠만 따로 막을 수 있어요. 쇼츠 탭을 잠가서 끝없이 넘기는 화면으로 들어가지 못하게 하고, 긴 영상, 구독, 검색은 그대로 둬요."
     }
    },
    {
     "@type": "Question",
-    "name": "인스타그램이나 유튜브를 지우거나 다른 앱으로 바꿔야 하나요?",
+    "name": "인스타그램과 유튜브를 따로 설정할 수 있나요?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "아니요. 원래 쓰던 인스타그램·유튜브 앱을 그대로 써요. 로그인이나 회원가입도 필요 없어요."
+     "text": "네, 앱별로 켜고 끌 수 있어요. 릴스만 막고 쇼츠는 그대로 두거나, 그 반대도 돼요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "친구가 보낸 릴스도 못 보나요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "볼 수 있어요. DM으로 받은 릴스나 검색에서 연 영상은 처음 연 하나는 보고, 다음 영상으로 넘기는 순간만 막아요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "하루에 조금은 보고 싶어요.",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "타이머로 하루 한도를 정할 수 있어요. 한도까지는 자유롭게 보고, 넘으면 그날은 릴스·쇼츠가 멈춰요. 무료는 하루 15~20분, Pro는 5~120분까지 정할 수 있어요."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "인스타그램이나 유튜브를 지워야 하나요?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "아니요. 원래 쓰던 앱을 그대로 써요. 로그인이나 회원가입도 필요 없어요."
     }
    },
    {
@@ -393,7 +417,7 @@ footer a{color:var(--on-grass)}
     "name": "접근성 권한은 왜 필요한가요?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "릴스·쇼츠 탭과 영상 화면을 찾아 가리기 위해 안드로이드 접근성 기능을 써요. 켜기 전에 무엇을 읽고 어떻게 처리하는지 앱에서 먼저 안내하고, 폰 설정에서 언제든 끌 수 있어요."
+     "text": "릴스·쇼츠 탭을 찾아서 가리는 데 필요해요. 켜기 전에 무엇을 읽고 어떻게 처리하는지 앱에서 먼저 안내하고, 폰 설정에서 언제든 끌 수 있어요."
     }
    },
    {
@@ -401,7 +425,7 @@ footer a{color:var(--on-grass)}
     "name": "무료로 쓸 수 있나요?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "릴스·쇼츠를 막는 기능은 모두 무료예요. Pro는 월간 기록, 평생 환산, 요일별 규칙처럼 기록과 규칙을 넓혀 주는 기능이에요."
+     "text": "네, 막는 기능은 전부 무료예요. Pro는 월간 기록, 평생 환산, 요일별 규칙처럼 기록과 규칙을 넓혀 주는 기능이에요."
     }
    },
    {
@@ -409,7 +433,7 @@ footer a{color:var(--on-grass)}
     "name": "아이폰에서도 쓸 수 있나요?",
     "acceptedAnswer": {
      "@type": "Answer",
-     "text": "지금은 안드로이드 전용이에요. 아이폰은 다른 앱 화면 안의 릴스 탭만 골라 가리는 기능을 허용하지 않아서, 같은 방식으로는 만들 수 없어요. 아래 '아이폰 버전 원해요'를 눌러 주시면 수요를 보고 다른 방식을 고민해 볼게요."
+     "text": "아직은 안드로이드 전용이에요. 아이폰은 다른 앱 화면 안의 릴스 탭만 골라 가리는 기능을 허용하지 않아서, 같은 방식으로는 만들 수 없어요. 아래 '아이폰 버전 원해요'를 눌러 주시면 수요를 보고 다른 방식을 고민해 볼게요."
     }
    }
   ]
@@ -636,16 +660,28 @@ footer a{color:var(--on-grass)}
     <h2 id="faq-title">자주 묻는 질문</h2>
     <div class="faq">
       <details class="faq-item">
-        <summary><h3>인스타그램 릴스만 끄는 방법이 있나요?</h3></summary>
-        <p>인스타그램 앱 설정만으로는 릴스 탭을 없앨 수 없어요. 스크롤 멈춰는 릴스 탭을 가리고, 친구가 DM으로 보낸 릴스는 하나만 볼 수 있게 해요. DM, 피드, 스토리, 검색은 원래대로 쓸 수 있어요.</p>
+        <summary><h3>인스타그램 릴스만 끌 수 있나요?</h3></summary>
+        <p>네, 릴스만 따로 막을 수 있어요. 인스타그램 설정에는 릴스 탭만 끄는 기능이 없어서, 스크롤 멈춰가 릴스 탭을 가리고 넘기는 화면으로 들어가지 못하게 해요. DM, 피드, 스토리, 검색은 그대로 쓸 수 있어요.</p>
       </details>
       <details class="faq-item">
-        <summary><h3>유튜브 쇼츠만 안 보는 법은요?</h3></summary>
-        <p>쇼츠 탭을 잠가서 끝없이 넘기는 화면으로 들어가지 않게 해요. 검색이나 채널에서 연 쇼츠는 하나만 볼 수 있고, 긴 영상과 구독, 검색은 그대로예요.</p>
+        <summary><h3>유튜브 쇼츠만 끌 수 있나요?</h3></summary>
+        <p>네, 쇼츠만 따로 막을 수 있어요. 쇼츠 탭을 잠가서 끝없이 넘기는 화면으로 들어가지 못하게 하고, 긴 영상, 구독, 검색은 그대로 둬요.</p>
       </details>
       <details class="faq-item">
-        <summary><h3>인스타그램이나 유튜브를 지우거나 다른 앱으로 바꿔야 하나요?</h3></summary>
-        <p>아니요. 원래 쓰던 인스타그램·유튜브 앱을 그대로 써요. 로그인이나 회원가입도 필요 없어요.</p>
+        <summary><h3>인스타그램과 유튜브를 따로 설정할 수 있나요?</h3></summary>
+        <p>네, 앱별로 켜고 끌 수 있어요. 릴스만 막고 쇼츠는 그대로 두거나, 그 반대도 돼요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>친구가 보낸 릴스도 못 보나요?</h3></summary>
+        <p>볼 수 있어요. DM으로 받은 릴스나 검색에서 연 영상은 처음 연 하나는 보고, 다음 영상으로 넘기는 순간만 막아요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>하루에 조금은 보고 싶어요.</h3></summary>
+        <p>타이머로 하루 한도를 정할 수 있어요. 한도까지는 자유롭게 보고, 넘으면 그날은 릴스·쇼츠가 멈춰요. 무료는 하루 15~20분, Pro는 5~120분까지 정할 수 있어요.</p>
+      </details>
+      <details class="faq-item">
+        <summary><h3>인스타그램이나 유튜브를 지워야 하나요?</h3></summary>
+        <p>아니요. 원래 쓰던 앱을 그대로 써요. 로그인이나 회원가입도 필요 없어요.</p>
       </details>
       <details class="faq-item">
         <summary><h3>광고나 개인정보 수집이 있나요?</h3></summary>
@@ -653,15 +689,15 @@ footer a{color:var(--on-grass)}
       </details>
       <details class="faq-item">
         <summary><h3>접근성 권한은 왜 필요한가요?</h3></summary>
-        <p>릴스·쇼츠 탭과 영상 화면을 찾아 가리기 위해 안드로이드 접근성 기능을 써요. 켜기 전에 무엇을 읽고 어떻게 처리하는지 앱에서 먼저 안내하고, 폰 설정에서 언제든 끌 수 있어요.</p>
+        <p>릴스·쇼츠 탭을 찾아서 가리는 데 필요해요. 켜기 전에 무엇을 읽고 어떻게 처리하는지 앱에서 먼저 안내하고, 폰 설정에서 언제든 끌 수 있어요.</p>
       </details>
       <details class="faq-item">
         <summary><h3>무료로 쓸 수 있나요?</h3></summary>
-        <p>릴스·쇼츠를 막는 기능은 모두 무료예요. Pro는 월간 기록, 평생 환산, 요일별 규칙처럼 기록과 규칙을 넓혀 주는 기능이에요.</p>
+        <p>네, 막는 기능은 전부 무료예요. Pro는 월간 기록, 평생 환산, 요일별 규칙처럼 기록과 규칙을 넓혀 주는 기능이에요.</p>
       </details>
       <details class="faq-item">
         <summary><h3>아이폰에서도 쓸 수 있나요?</h3></summary>
-        <p>지금은 안드로이드 전용이에요. 아이폰은 다른 앱 화면 안의 릴스 탭만 골라 가리는 기능을 허용하지 않아서, 같은 방식으로는 만들 수 없어요. 아래 '아이폰 버전 원해요'를 눌러 주시면 수요를 보고 다른 방식을 고민해 볼게요.</p>
+        <p>아직은 안드로이드 전용이에요. 아이폰은 다른 앱 화면 안의 릴스 탭만 골라 가리는 기능을 허용하지 않아서, 같은 방식으로는 만들 수 없어요. 아래 '아이폰 버전 원해요'를 눌러 주시면 수요를 보고 다른 방식을 고민해 볼게요.</p>
       </details>
     </div>
   </div>
