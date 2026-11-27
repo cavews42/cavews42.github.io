@@ -29,9 +29,6 @@
 @font-face{font-family:"Jua";src:url("fonts/jua-subset.woff2?v=1128b") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Gowun Dodum";src:url("fonts/gowun-dodum-subset.woff2?v=1128b") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 
-/* Layout: a sunny hill. A sky band holds the headline and the app icon as a small landscape;
-   a grass band carries "when to use it"; calm left-aligned sections sit on a green-tinted ground.
-   The one memorable moment is the phone demo, where the Reels tab pops like a balloon. */
 :root{
   --ground:#F5F9F4;
   --surface:#FFFFFF;
@@ -492,7 +489,7 @@ footer a{color:var(--on-grass)}
 <section class="section" id="demo" aria-labelledby="demo-title">
   <div class="wrap">
     <h2 id="demo-title">막는 방식이 조용해요</h2>
-    <p class="section-lead">경고 화면을 띄우거나 앱을 닫아버리지 않아요. 숏폼으로 들어가는 문만 슬쩍 치워둬요.</p>
+    <p class="section-lead">경고 화면을 띄우거나 앱을 닫아버리지 않아요. 숏폼으로 들어가는 길만 막아요.</p>
     <div class="demo">
       <div class="phone popped" id="phone" aria-hidden="true">
         <div class="screen">
@@ -539,7 +536,7 @@ footer a{color:var(--on-grass)}
     <div class="diffs">
       <div class="diff">
         <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><path d="M19 4 L31 9 V18 C31 26 26 31 19 34 C12 31 7 26 7 18 V9 Z" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linejoin="round"/><path d="M13 19 L17.5 23.5 L25 15" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><h3>광고도, 수집도 없어요</h3><p>집중하려고 켠 앱에 광고가 뜨면 이상하잖아요. 그래서 광고도, 로그인도, 분석 도구도 넣지 않았어요. 화면 내용은 저장하거나 보내지 않고 폰 안에서만 처리해요.</p></div>
+        <div><h3>광고도, 수집도 없어요</h3><p>로그인도, 분석 도구도 넣지 않았어요. 화면 내용은 저장하거나 보내지 않고 폰 안에서만 처리해요.</p></div>
       </div>
       <div class="diff">
         <div class="diff-art" aria-hidden="true"><svg viewBox="0 0 38 38"><rect x="10" y="4" width="18" height="14" rx="4" fill="var(--grass)"/><rect x="10" y="21" width="18" height="13" rx="4" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-dasharray="4 3"/><path d="M33 26 C33 18 31 14 28 11" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round"/><path d="M24 11 L28 11 L28 15" fill="none" stroke="var(--grass)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -596,7 +593,7 @@ footer a{color:var(--on-grass)}
           <label for="mins">하루에 숏폼 보는 시간</label>
           <div class="field-row"><input type="range" id="mins" min="5" max="240" step="5" value="60"><output id="mins-out" for="mins">1시간</output></div>
         </div>
-        <p class="calc-foot">통계청 2024년 생명표의 기대수명 83.7세를 기준으로 계산해요. 계산은 이 페이지 안에서만 하고, 입력한 값은 어디에도 보내지 않아요.</p>
+        <p class="calc-foot">통계청 2024년 생명표의 기대수명 83.7세를 기준으로 계산해요.</p>
       </form>
       <div class="calc-result">
         <p class="sr-only" aria-live="polite" id="calc-live"></p>
@@ -607,7 +604,7 @@ footer a{color:var(--on-grass)}
         <figure class="life">
           <canvas id="life" role="img" aria-label="점 하나가 1년인 인생 그림"></canvas>
           <div class="life-side">
-            <figcaption class="life-cap">점 하나가 1년, 한 줄이 10년이에요. 숏폼 시간은 한데 모아 칠했어요.</figcaption>
+            <figcaption class="life-cap">점 하나가 1년, 한 줄이 10년이에요.</figcaption>
             <ul class="legend">
               <li><span class="sw sw-past"></span>지나온 해</li>
               <li><span class="sw sw-sf"></span>숏폼</li>
@@ -851,10 +848,10 @@ footer a{color:var(--on-grass)}
     if (!can15 && mode15) setMode(false);
     saved.textContent = can15
       ? '하루 15분으로 줄이면 약 ' + span(used - at15) + '을 돌려받아요.'
-      : '이미 하루 15분 이하예요. 그 리듬을 지키도록 도와드릴게요.';
+      : '이미 하루 15분 이하예요.';
     var shown = mode15 ? at15 : used;
     live.textContent = (mode15 ? '하루 15분이면 평생 약 ' : '지금 속도라면 평생 약 ') + span(shown) + '. ' + saved.textContent;
-    canvas.setAttribute('aria-label', '점 하나가 1년인 인생 그림. 기대수명 83.7년 중 ' + a + '년을 지나왔고, 앞으로 숏폼에 쓰게 될 약 ' + span(used) + '을 한데 모아 칠했어요.'
+    canvas.setAttribute('aria-label', '점 하나가 1년인 인생 그림. 기대수명 83.7년 중 ' + a + '년을 지나왔고, 앞으로 숏폼에 쓰게 될 시간은 약 ' + span(used) + '이에요.'
       + (mode15 ? ' 하루 15분이면 그중 약 ' + span(used - at15) + '이 돌려받는 시간으로 바뀌어요.' : ''));
     return {past:a, sf:used / 365, keep:at15 / 365, mix:mode15 ? 1 : 0, days:used, d15:at15};
   }
